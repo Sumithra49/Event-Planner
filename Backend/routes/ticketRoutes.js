@@ -1,7 +1,7 @@
 const express = require("express");
 const ticketRoutes = express.Router();
 const ticketController = require("../controllers/ticketController");
-const authenticateToken = require("../middleware/Authentication"); // Adjust the path as necessary
+const authenticateToken = require("../middleware/Auth"); // Adjust the path as necessary
 
 // Create a new ticket
 ticketRoutes.post("/", authenticateToken, ticketController.createTicket);
