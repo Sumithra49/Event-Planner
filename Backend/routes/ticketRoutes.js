@@ -1,21 +1,20 @@
 const express = require("express");
-const ticketRoutes = express.Router();
+const ticketRouter = express.Router();
 const ticketController = require("../controllers/ticketController");
-const authenticateToken = require("../middleware/Auth"); // Adjust the path as necessary
 
 // Create a new ticket
-ticketRoutes.post("/", authenticateToken, ticketController.createTicket);
+ticketRouter.post("/", ticketController.createTicket);
 
 // Get all tickets
-ticketRoutes.get("/", authenticateToken, ticketController.getAllTickets);
+ticketRouter.get("/", ticketController.getAllTickets);
 
 // Get a single ticket by ID
-ticketRoutes.get("/:id", authenticateToken, ticketController.getTicketById);
+ticketRouter.get("/:id", ticketController.getTicketById);
 
 // Update a ticket
-ticketRoutes.put("/:id", authenticateToken, ticketController.updateTicket);
+ticketRouter.put("/:id", ticketController.updateTicket);
 
 // Delete a ticket
-ticketRoutes.delete("/:id", authenticateToken, ticketController.deleteTicket);
+ticketRouter.delete("/:id", ticketController.deleteTicket);
 
-module.exports = ticketRoutes;
+module.exports = ticketRouter;

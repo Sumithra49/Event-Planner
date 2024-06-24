@@ -1,7 +1,7 @@
 const express = require("express");
 const authRoutes = require("./routes/userRoutes");
 const eventRoutes = require("./routes/eventRoutes");
-const ticketRoutes = require("./routes/ticketRoutes");
+const ticketRouter = require("./routes/ticketRoutes");
 const attendeeRoutes = require("./routes/attendeeRoutes");
 const feedbackRoutes = require("./routes/feedbackRoutes");
 const cors = require("cors");
@@ -9,6 +9,7 @@ const cors = require("cors");
 const { connectionToDb } = require("./config/db");
 require("dotenv").config();
 const app = express();
+app.use(cors());
 app.use(express.json());
 const port = 8080;
 
@@ -17,7 +18,7 @@ app.get("/", (req, res) => {
 });
 app.use("/users", authRoutes);
 app.use("/events", eventRoutes);
-app.use("/tickets", ticketRoutes);
+app.use("/tickets", ticketRouter);
 app.use("/attendees", attendeeRoutes);
 app.use("/feedbacks", feedbackRoutes);
 
