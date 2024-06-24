@@ -21,6 +21,7 @@ Attendee.init(
   {
     sequelize,
     modelName: "Attendee",
+    timestamps: false,
   }
 );
 

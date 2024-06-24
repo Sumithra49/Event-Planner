@@ -3,7 +3,6 @@ const Ticket = require("../models/Ticket");
 // Create a new ticket
 exports.createTicket = async (req, res) => {
   try {
-    req.body.user_id = req.user.id; // Associate the ticket with the authenticated user
     const ticket = await Ticket.create(req.body);
     res.status(201).json(ticket);
   } catch (error) {
@@ -41,9 +40,6 @@ exports.updateTicket = async (req, res) => {
     if (!ticket) {
       return res.status(404).json({ error: "Ticket not found" });
     }
-    if (ticket.user_id !== req.user.id) {
-      return res.status(403).json({ error: "Unauthorized" });
-    }
     await ticket.update(req.body);
     res.status(200).json(ticket);
   } catch (error) {
@@ -57,9 +53,6 @@ exports.deleteTicket = async (req, res) => {
     const ticket = await Ticket.findByPk(req.params.id);
     if (!ticket) {
       return res.status(404).json({ error: "Ticket not found" });
-    }
-    if (ticket.user_id !== req.user.id) {
-      return res.status(403).json({ error: "Unauthorized" });
     }
     await ticket.destroy();
     res.status(204).end();
